@@ -3,6 +3,7 @@ package icndb
 import (
 	"errors"
 	"fmt"
+	"strings"
 )
 
 func GetJokes(first string, last string) ([]*Joke, error) {
@@ -21,8 +22,29 @@ func GetJokes(first string, last string) ([]*Joke, error) {
 	return buildJokes(values)
 }
 
-func GetRandomJokes(count uint64, first string, last string) ([]*Joke, error) {
-	payload, err := get(fmt.Sprintf("jokes/random/%d", count), prepNames(first, last))
+func GetRandomJokes(count uint64, first string, last string, categories map[string]bool) ([]*Joke, error) {
+	inclusions := []string{}
+	exclusions := []string{}
+
+	for category, include := range categories {
+		if include {
+			inclusions = append(inclusions, category)
+		} else {
+			exclusions = append(exclusions, category)
+		}
+	}
+
+	params := prepNames(first, last)
+
+	if len(inclusions) > 0 {
+		params["limitTo"] = "[" + strings.Join(inclusions, ",") + "]"
+	}
+
+	if len(exclusions) > 0 {
+		params["exclude"] = "[" + strings.Join(inclusions, ",") + "]"
+	}
+
+	payload, err := get(fmt.Sprintf("jokes/random/%d", count), params)
 
 	if err != nil {
 		return nil, err
