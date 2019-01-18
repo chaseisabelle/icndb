@@ -8,11 +8,9 @@ import (
 
 func TestGetJoke_success_noNames(t *testing.T) {
 	server := httptest.NewServer(http.HandlerFunc(func(response http.ResponseWriter, request *http.Request) {
-		response.Header().Set("Content-Type", "application/json; charset=utf-8")
-
-		response.Write([]byte(`{"type":"success","value":{"id":420,"joke":"lol","categories":[]}}`))
-
 		response.WriteHeader(http.StatusOK)
+		response.Header().Set("Content-Type", "application/json; charset=utf-8")
+		response.Write([]byte(`{"type":"success","value":{"id":420,"joke":"lol","categories":[]}}`))
 	}))
 
 	defer server.Close()
@@ -44,11 +42,9 @@ func TestGetJoke_success_firstName(t *testing.T) {
 			t.Errorf("Expected chase, but got %+v.", first)
 		}
 
-		response.Header().Set("Content-Type", "application/json; charset=utf-8")
-
-		response.Write([]byte(`{"type":"success","value":{"id":420,"joke":"lol","categories":[]}}`))
-
 		response.WriteHeader(http.StatusOK)
+		response.Header().Set("Content-Type", "application/json; charset=utf-8")
+		response.Write([]byte(`{"type":"success","value":{"id":420,"joke":"lol","categories":[]}}`))
 	}))
 
 	defer server.Close()
@@ -70,11 +66,9 @@ func TestGetJoke_success_lastName(t *testing.T) {
 			t.Errorf("Expected isabelle, but got %+v.", last)
 		}
 
-		response.Header().Set("Content-Type", "application/json; charset=utf-8")
-
-		response.Write([]byte(`{"type":"success","value":{"id":420,"joke":"lol","categories":[]}}`))
-
 		response.WriteHeader(http.StatusOK)
+		response.Header().Set("Content-Type", "application/json; charset=utf-8")
+		response.Write([]byte(`{"type":"success","value":{"id":420,"joke":"lol","categories":[]}}`))
 	}))
 
 	defer server.Close()
@@ -102,11 +96,9 @@ func TestGetJoke_success_bothNames(t *testing.T) {
 			t.Errorf("Expected isabelle, but got %+v.", last)
 		}
 
-		response.Header().Set("Content-Type", "application/json; charset=utf-8")
-
-		response.Write([]byte(`{"type":"success","value":{"id":420,"joke":"lol","categories":[]}}`))
-
 		response.WriteHeader(http.StatusOK)
+		response.Header().Set("Content-Type", "application/json; charset=utf-8")
+		response.Write([]byte(`{"type":"success","value":{"id":420,"joke":"lol","categories":[]}}`))
 	}))
 
 	defer server.Close()
@@ -122,11 +114,9 @@ func TestGetJoke_success_bothNames(t *testing.T) {
 
 func TestGetRandomJoke_success(t *testing.T) {
 	server := httptest.NewServer(http.HandlerFunc(func(response http.ResponseWriter, request *http.Request) {
-		response.Header().Set("Content-Type", "application/json; charset=utf-8")
-
-		response.Write([]byte(`{"type":"success","value":{"id":666,"joke":"random","categories":[]}}`))
-
 		response.WriteHeader(http.StatusOK)
+		response.Header().Set("Content-Type", "application/json; charset=utf-8")
+		response.Write([]byte(`{"type":"success","value":{"id":666,"joke":"random","categories":[]}}`))
 	}))
 
 	defer server.Close()

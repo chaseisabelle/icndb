@@ -8,11 +8,9 @@ import (
 
 func TestGetJokes_success_noNames(t *testing.T) {
 	server := httptest.NewServer(http.HandlerFunc(func(response http.ResponseWriter, request *http.Request) {
-		response.Header().Set("Content-Type", "application/json; charset=utf-8")
-
-		response.Write([]byte(`{"type":"success","value":[{"id":69,"joke":"lol","categories":[]},{"id":666,"joke":"wtf","categories":["turtles"]}]}`))
-
 		response.WriteHeader(http.StatusOK)
+		response.Header().Set("Content-Type", "application/json; charset=utf-8")
+		response.Write([]byte(`{"type":"success","value":[{"id":69,"joke":"lol","categories":[]},{"id":666,"joke":"wtf","categories":["turtles"]}]}`))
 	}))
 
 	defer server.Close()
@@ -64,11 +62,9 @@ func TestGetJokes_success_firstName(t *testing.T) {
 			t.Errorf("Expected chase, but got %+v.", first)
 		}
 
-		response.Header().Set("Content-Type", "application/json; charset=utf-8")
-
-		response.Write([]byte(`{"type":"success","value":[{"id":69,"joke":"lol","categories":[]}]}`))
-
 		response.WriteHeader(http.StatusOK)
+		response.Header().Set("Content-Type", "application/json; charset=utf-8")
+		response.Write([]byte(`{"type":"success","value":[{"id":69,"joke":"lol","categories":[]}]}`))
 	}))
 
 	defer server.Close()
@@ -90,11 +86,9 @@ func TestGetJokes_success_lastName(t *testing.T) {
 			t.Errorf("Expected isabelle, but got %+v.", last)
 		}
 
-		response.Header().Set("Content-Type", "application/json; charset=utf-8")
-
-		response.Write([]byte(`{"type":"success","value":[{"id":69,"joke":"lol","categories":[]}]}`))
-
 		response.WriteHeader(http.StatusOK)
+		response.Header().Set("Content-Type", "application/json; charset=utf-8")
+		response.Write([]byte(`{"type":"success","value":[{"id":69,"joke":"lol","categories":[]}]}`))
 	}))
 
 	defer server.Close()
@@ -122,11 +116,9 @@ func TestGetJokes_success_bothNames(t *testing.T) {
 			t.Errorf("Expected isabelle, but got %+v.", last)
 		}
 
-		response.Header().Set("Content-Type", "application/json; charset=utf-8")
-
-		response.Write([]byte(`{"type":"success","value":[{"id":69,"joke":"lol","categories":[]}]}`))
-
 		response.WriteHeader(http.StatusOK)
+		response.Header().Set("Content-Type", "application/json; charset=utf-8")
+		response.Write([]byte(`{"type":"success","value":[{"id":69,"joke":"lol","categories":[]}]}`))
 	}))
 
 	defer server.Close()

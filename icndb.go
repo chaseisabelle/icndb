@@ -12,7 +12,7 @@ var host = "http://api.icndb.com"
 var client = &http.Client{}
 
 func get(endpoint string, params map[string]string) (interface{}, error) {
-	request, err := http.NewRequest("GET", host+"/"+endpoint, nil)
+	request, err := http.NewRequest("GET", host + "/" + endpoint, nil)
 
 	if err != nil {
 		return nil, err
@@ -35,6 +35,10 @@ func get(endpoint string, params map[string]string) (interface{}, error) {
 		return nil, err
 	}
 
+	if response.StatusCode != http.StatusOK {
+		return nil, errors.New(http.StatusText(response.StatusCode))
+	}
+
 	body, err := ioutil.ReadAll(response.Body)
 
 	if err != nil {
@@ -51,7 +55,7 @@ func get(endpoint string, params map[string]string) (interface{}, error) {
 
 	status, ok := payload["type"].(string)
 
-	if !ok || status == "" {
+	if !ok {
 		return nil, errors.New("Failed to detect response status.")
 	}
 
