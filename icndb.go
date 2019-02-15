@@ -8,11 +8,22 @@ import (
 	"strings"
 )
 
-var host = "http://api.icndb.com"
-var client = &http.Client{}
+const HOST = "http://api.icndb.com"
 
-func get(endpoint string, params map[string]string) (interface{}, error) {
-	request, err := http.NewRequest("GET", host + "/" + endpoint, nil)
+type ICNDB struct {
+	Client *http.Client
+	Host   string
+}
+
+func New() *ICNDB {
+	return &ICNDB{
+		Client: &http.Client{},
+		Host:   HOST,
+	}
+}
+
+func (icndb *ICNDB) get(endpoint string, params map[string]string) (interface{}, error) {
+	request, err := http.NewRequest("GET", icndb.Host+"/"+endpoint, nil)
 
 	if err != nil {
 		return nil, err
@@ -25,7 +36,7 @@ func get(endpoint string, params map[string]string) (interface{}, error) {
 	}
 
 	request.URL.RawQuery = query.Encode()
-	response, err := client.Do(request)
+	response, err := icndb.Client.Do(request)
 
 	if response != nil {
 		defer response.Body.Close()

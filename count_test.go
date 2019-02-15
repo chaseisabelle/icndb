@@ -15,9 +15,7 @@ func TestGetCount_success(t *testing.T) {
 
 	defer server.Close()
 
-	host = server.URL
-
-	count, err := GetCount()
+	count, err := icndb(server.URL).Count()
 
 	if err != nil {
 		t.Error(err)

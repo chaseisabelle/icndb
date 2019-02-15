@@ -6,8 +6,8 @@ import (
 	"strings"
 )
 
-func GetJokes(first string, last string) ([]*Joke, error) {
-	payload, err := get("jokes", prepNames(first, last))
+func (icndb *ICNDB) Jokes(first string, last string) ([]*Joke, error) {
+	payload, err := icndb.get("jokes", prepNames(first, last))
 
 	if err != nil {
 		return nil, err
@@ -22,7 +22,7 @@ func GetJokes(first string, last string) ([]*Joke, error) {
 	return buildJokes(values)
 }
 
-func GetRandomJokes(count uint64, first string, last string, categories map[string]bool) ([]*Joke, error) {
+func (icndb *ICNDB) RandomJokes(count uint64, first string, last string, categories map[string]bool) ([]*Joke, error) {
 	inclusions := []string{}
 	exclusions := []string{}
 
@@ -44,7 +44,7 @@ func GetRandomJokes(count uint64, first string, last string, categories map[stri
 		params["exclude"] = "[" + strings.Join(inclusions, ",") + "]"
 	}
 
-	payload, err := get(fmt.Sprintf("jokes/random/%d", count), params)
+	payload, err := icndb.get(fmt.Sprintf("jokes/random/%d", count), params)
 
 	if err != nil {
 		return nil, err

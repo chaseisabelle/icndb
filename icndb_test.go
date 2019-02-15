@@ -6,6 +6,14 @@ import (
 	"testing"
 )
 
+func icndb(host string) *ICNDB {
+	icndb := New()
+
+	icndb.Host = host
+
+	return icndb
+}
+
 func TestPrepNames_success_timeSpace(t *testing.T) {
 	first := "  chase"
 	last := "isabelle   "
@@ -33,9 +41,7 @@ func TestGet_failure_apiError(t *testing.T) {
 
 	defer server.Close()
 
-	host = server.URL
-
-	_, err := get("", map[string]string{})
+	_, err := icndb(server.URL).get("", map[string]string{})
 
 	if err == nil {
 		t.Error("Expected error.")
@@ -59,9 +65,7 @@ func TestGet_failure_serverError(t *testing.T) {
 
 	defer server.Close()
 
-	host = server.URL
-
-	_, err := get("", map[string]string{})
+	_, err := icndb(server.URL).get("", map[string]string{})
 
 	if err == nil {
 		t.Error("Expected error.")

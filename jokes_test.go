@@ -15,9 +15,7 @@ func TestGetJokes_success_noNames(t *testing.T) {
 
 	defer server.Close()
 
-	host = server.URL
-
-	jokes, err := GetJokes("", "")
+	jokes, err := icndb(server.URL).Jokes("", "")
 
 	if err != nil {
 		t.Error(err)
@@ -69,9 +67,7 @@ func TestGetJokes_success_firstName(t *testing.T) {
 
 	defer server.Close()
 
-	host = server.URL
-
-	_, err := GetJokes("chase", "")
+	_, err := icndb(server.URL).Jokes("chase", "")
 
 	if err != nil {
 		t.Error(err)
@@ -93,9 +89,7 @@ func TestGetJokes_success_lastName(t *testing.T) {
 
 	defer server.Close()
 
-	host = server.URL
-
-	_, err := GetJokes("", "isabelle")
+	_, err := icndb(server.URL).Jokes("", "isabelle")
 
 	if err != nil {
 		t.Error(err)
@@ -123,9 +117,7 @@ func TestGetJokes_success_bothNames(t *testing.T) {
 
 	defer server.Close()
 
-	host = server.URL
-
-	_, err := GetJokes("chase", "isabelle")
+	_, err := icndb(server.URL).Jokes("chase", "isabelle")
 
 	if err != nil {
 		t.Error(err)

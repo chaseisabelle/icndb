@@ -2,8 +2,8 @@ package icndb
 
 import "errors"
 
-func GetCount() (uint64, error) {
-	payload, err := get("count", make(map[string]string))
+func (icndb *ICNDB) Count() (uint64, error) {
+	payload, err := icndb.get("count", make(map[string]string))
 
 	if err != nil {
 		return 0, err

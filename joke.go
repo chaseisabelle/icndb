@@ -10,8 +10,8 @@ type Joke struct {
 	Text string `json:"text"`
 }
 
-func GetJoke(id uint64, first string, last string) (*Joke, error) {
-	payload, err := get(fmt.Sprintf("jokes/%d", id), prepNames(first, last))
+func (icndb *ICNDB) Joke(id uint64, first string, last string) (*Joke, error) {
+	payload, err := icndb.get(fmt.Sprintf("jokes/%d", id), prepNames(first, last))
 
 	if err != nil {
 		return nil, err
@@ -20,8 +20,8 @@ func GetJoke(id uint64, first string, last string) (*Joke, error) {
 	return buildJoke(payload)
 }
 
-func GetRandomJoke(first string, last string) (*Joke, error) {
-	payload, err := get("jokes/random", prepNames(first, last))
+func (icndb *ICNDB) RandomJoke(first string, last string) (*Joke, error) {
+	payload, err := icndb.get("jokes/random", prepNames(first, last))
 
 	if err != nil {
 		return nil, err

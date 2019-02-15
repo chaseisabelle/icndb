@@ -2,8 +2,8 @@ package icndb
 
 import "github.com/pkg/errors"
 
-func GetCategories() ([]string, error) {
-	payload, err := get("categories", make(map[string]string))
+func (icndb *ICNDB) Categories() ([]string, error) {
+	payload, err := icndb.get("categories", make(map[string]string))
 
 	if err != nil {
 		return nil, err

@@ -6,7 +6,9 @@ import (
 )
 
 func main() {
-	jokes, err := icndb.GetJokes("", "")
+	icndb := icndb.New()
+
+	jokes, err := icndb.Jokes("", "")
 
 	if err != nil {
 		panic(err)
@@ -18,7 +20,7 @@ func main() {
 		fmt.Printf("\t%d: %s\n", joke.Id, joke.Text)
 	}
 
-	joke, err := icndb.GetJoke(jokes[0].Id, "chase", "isabelle")
+	joke, err := icndb.Joke(jokes[0].Id, "chase", "isabelle")
 
 	if err != nil {
 		panic(err)
@@ -26,7 +28,7 @@ func main() {
 
 	fmt.Printf("the jokes on me\n\t%s\n", joke.Text)
 
-	jokes, err = icndb.GetRandomJokes(5, "our lord and savior", "shrek", make(map[string]bool))
+	jokes, err = icndb.RandomJokes(5, "our lord and savior", "shrek", make(map[string]bool))
 
 	if err != nil {
 		panic(err)
@@ -38,7 +40,7 @@ func main() {
 		fmt.Printf("\t%d: %s\n", joke.Id, joke.Text)
 	}
 
-	joke, err = icndb.GetRandomJoke("smash", "mouth")
+	joke, err = icndb.RandomJoke("smash", "mouth")
 
 	if err != nil {
 		panic(err)
@@ -46,7 +48,7 @@ func main() {
 
 	fmt.Printf("a random joke\n\t%s\n", joke.Text)
 
-	categories, err := icndb.GetCategories()
+	categories, err := icndb.Categories()
 
 	if err != nil {
 		panic(err)
